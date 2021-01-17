@@ -28,4 +28,8 @@ public class ProductService {
     public void deleteProductById(Long id) {
         productRepository.deleteById(id);
     }
+
+    public List<Product> findAllByPrice(Integer min, Integer max) {
+        return productRepository.findAllByPriceBetween(min, max);
+    }
 }
