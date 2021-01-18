@@ -24,7 +24,7 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
 
      $scope.deleteProductById = function (id) {
         $http.delete(contextPath + '/products/' + id)
-            .then(function (response : T) { //:Т сам дописал, не было его у меня и зачем он не понял
+            .then(function (response) { //:Т сам дописал, не было его у меня и зачем он не понял
             $scope.fillTable;
         });
      };

@@ -16,7 +16,7 @@
     <div class="container" ng-controller="indexController">
         <h1>Market SS</h1>
 
-        <span>{{ProductsList[1]}}</span>
+      <!--  <span>{{ProductsList[1]}}</span> -->
 
         <h3>Фильтр</h3>
         <form novalidate ng-submit="fillTable()">
@@ -29,10 +29,11 @@
                     <label for="filterMaxPrice">Максимальная цена</label>
                     <input class="form-control" type="number" ng-model="filter.max_price" id="filterMaxPrice">
                 </div>
-            </div>
             <div>
                 <button class="btn btn-success" type="submit">Применить</button>
             </div>
+            </div>
+
         </form>
 
         <h3>Список товаров</h3>
