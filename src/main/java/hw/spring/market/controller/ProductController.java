@@ -1,8 +1,10 @@
 package hw.spring.market.controller;
 
+import hw.spring.market.dto.ProductDto;
 import hw.spring.market.model.Product;
 import hw.spring.market.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,22 +17,31 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public List<Product> findAllProducts(
+    public Page<ProductDto> findAllProducts(
+            @RequestParam(name = "title", required = false) String title,
             @RequestParam(name = "min_price", defaultValue = "0") Integer min_price,
-            @RequestParam(name = "max_price", required = false) Integer max_price
+            @RequestParam(name = "max_price", required = false) Integer max_price,
+            @RequestParam(name = "p", defaultValue = "1") Integer page
     ) {
         if (max_price == null) {
             max_price = Integer.MAX_VALUE;
         }
+        if (page < 1) {
+            page = 1;
+        }
 
         //return productService.findAllProducts();
-        return productService.findAllByPrice(min_price, max_price);
+        //return productService.findAllByPrice(min_price, max_price);
+        return productService.findAllByPages(page); //.getContent(); //getContent - выдёргиваем из Page в List
     }
 
     @GetMapping("/{id}")
-    public Product findProductById(@PathVariable Long id) {
+    public ProductDto findProductBuId(@PathVariable Long id) {
         return productService.findProductById(id).get();
     }
+//    public Product findProductById(@PathVariable Long id) {
+//        return productService.findProductById(id).get();
+//    }
 
 //    @GetMapping("/delete/{id}")
 //    public void deleteProductById(@PathVariable Long id){
