@@ -1,21 +1,5 @@
 angular.module('app', []).controller('indexController', function ($scope, $http) {
-    const contextPath = 'http://localhost:8189/market';
-
-//     $scope.fillTable = function () {
-//         $http.get(contextPath + '/products')
-//             .then(function (response) {
-//                 console.log(response);
-//                 $scope.ProductsList = response.data;
-//             });
-//     };
-
-     $scope.deleteProductById = function (id) {
-        $http.get(contextPath + '/products/delete/' + id)
-            .then(function (response) {
-            console.log(response);
-            $scope.fillTable;
-        });
-     };
+    const contextPath = 'http://localhost:8189/market/api/v1';
 
     $scope.fillTable = function () {
         $http({
@@ -30,17 +14,29 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
         });
     };
 
-//    $scope.submitCreateNewProduct = function () {
-//        $http.post(contextPath + '/products', $scope.newProduct)
-//            .then(function (response) {
-//                // console.log('sended:');
-//                // console.log($scope.newProduct);
-//                // console.log('received');
-//                // console.log(response.data);
-//                $scope.newProduct = null;
-//                $scope.fillTable();
-//            });
-//    };
+//     $scope.fillTable = function () {
+//         $http.get(contextPath + '/products')
+//             .then(function (response) {
+//                 console.log(response);
+//                 $scope.ProductsList = response.data;
+//             });
+//     };
+
+     $scope.deleteProductById = function (id) {
+        $http.delete(contextPath + '/products/' + id)
+            .then(function (response : T) { //:Т сам дописал, не было его у меня и зачем он не понял
+            $scope.fillTable;
+        });
+     };
+
+
+    $scope.submitCreateNewProduct = function () {
+        $http.post(contextPath + '/products', $scope.newProduct)
+            .then(function (response) {
+                $scope.newProduct = null;
+                $scope.fillTable();
+            });
+    };
 
     $scope.fillTable();
 });

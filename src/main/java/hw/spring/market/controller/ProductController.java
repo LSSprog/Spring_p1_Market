@@ -3,13 +3,14 @@ package hw.spring.market.controller;
 import hw.spring.market.model.Product;
 import hw.spring.market.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping ("/products")
+@RequestMapping ("/api/v1/products")
 public class ProductController {
     private final ProductService productService;
 
@@ -31,14 +32,26 @@ public class ProductController {
         return productService.findProductById(id).get();
     }
 
-    @GetMapping("/delete/{id}")
-    public void deleteProductById(@PathVariable Long id){
+//    @GetMapping("/delete/{id}")
+//    public void deleteProductById(@PathVariable Long id){
+//        productService.deleteProductById(id);
+//    }
+
+    @DeleteMapping("/{id}")
+    public void deleteProductBuId(@PathVariable Long id) {
         productService.deleteProductById(id);
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED) //хороший тон возвращать не 200 а ответ 201 - объект создан
     public Product saveNewProduct(@RequestBody Product product) {
-        //product.setId(null);
+        product.setId(null);
         return productService.saveOrUpdate(product);
     }
+
+    @PutMapping
+    public Product updateProduct(@RequestBody Product product) {
+        return productService.saveOrUpdate(product);
+    }
+
 }
