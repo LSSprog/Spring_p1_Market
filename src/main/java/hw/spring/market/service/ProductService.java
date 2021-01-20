@@ -41,7 +41,7 @@ public class ProductService {
         newProduct.setPrice(productDto.getPrice());
         productRepository.save(newProduct);
         productDto.setId(newProduct.getId());
-        return productDto;
+        return productDto; // ???? нужно ли здесь возвращать DTO?
     }
 
     public void deleteProductById(Long id) {
@@ -66,6 +66,6 @@ public class ProductService {
         product.setTitle(productDto.getTitle());
         product.setPrice(productDto.getPrice());
         productRepository.save(product); //здесь метод save обновит же имеющийся по ID, а не создаст новый?
-        return productDto;
+        return productDto; // ???? нужно ли здесь возвращать DTO?
     }
 }
