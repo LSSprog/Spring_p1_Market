@@ -32,8 +32,16 @@ public class ProductService {
         return productRepository.findAll().stream().map(ProductDto::new).collect(Collectors.toList());
     }
 
-    public Product saveOrUpdate(Product product) {
-        return productRepository.save(product);
+//    public Product saveOrUpdate(Product product) {
+//        return productRepository.save(product);
+//    }
+    public ProductDto saveNewProduct(ProductDto productDto) {
+        Product newProduct = new Product();
+        newProduct.setTitle(productDto.getTitle());
+        newProduct.setPrice(productDto.getPrice());
+        productRepository.save(newProduct);
+        productDto.setId(newProduct.getId());
+        return productDto;
     }
 
     public void deleteProductById(Long id) {
@@ -51,5 +59,13 @@ public class ProductService {
         Page<Product> originalPage = productRepository.findAll(PageRequest.of(page-1, 5));
         return new PageImpl<>(originalPage.getContent().stream().map(ProductDto::new).collect(Collectors.toList()),
                 originalPage.getPageable(), originalPage.getTotalElements());
+    }
+
+    public ProductDto updateProduct (ProductDto productDto) {
+        Product product = productRepository.findById(productDto.getId()).get();
+        product.setTitle(productDto.getTitle());
+        product.setPrice(productDto.getPrice());
+        productRepository.save(product); //здесь метод save обновит же имеющийся по ID, а не создаст новый?
+        return productDto;
     }
 }

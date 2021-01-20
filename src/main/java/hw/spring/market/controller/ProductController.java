@@ -55,14 +55,21 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED) //хороший тон возвращать не 200 а ответ 201 - объект создан
-    public Product saveNewProduct(@RequestBody Product product) {
-        product.setId(null);
-        return productService.saveOrUpdate(product);
+    public ProductDto saveNewProduct(@RequestBody ProductDto productDto) {
+        productDto.setId(null);
+        return productService.saveNewProduct(productDto);
     }
+//    public Product saveNewProduct(@RequestBody Product product) {
+//        product.setId(null);
+//        return productService.saveOrUpdate(product);
+//    }
 
     @PutMapping
-    public Product updateProduct(@RequestBody Product product) {
-        return productService.saveOrUpdate(product);
+    public ProductDto updateProduct(@RequestBody ProductDto productDto) {
+        return productService.updateProduct(productDto);
     }
+//    public Product updateProduct(@RequestBody Product product) {
+//        return productService.saveOrUpdate(product);
+//    }
 
 }
