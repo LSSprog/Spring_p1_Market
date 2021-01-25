@@ -13,7 +13,17 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
             }
         }).then(function (response) {
                $scope.ProductsPage = response.data;
-               $scope.PaginationArr = $scope.generatePagesInd(1, $scope.ProductsPage.totalPages);
+
+               let minPageInd = pageInd - 2;
+               if (minPageInd < 1) {
+               minPageInd = 1;
+               }
+               let maxPageInd = pageInd + 2;
+               if (maxPageInd > $scope.ProductsPage.totalPages) {
+               maxPageInd = $scope.ProductsPage.totalPages;
+               }
+
+               $scope.PaginationArr = $scope.generatePagesInd(minPageInd, maxPageInd);
         });
     };
 
@@ -59,9 +69,32 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
         let arr = [];
         for (let i = fistPage; i < lastPage + 1; i++) {
             arr.push(i);
-        }
+        };
         return arr;
-    }
+    };
+
+    $scope.fillCart = function () {
+        $http.get(contextPath + '/cart')
+                 .then(function (response) {
+                     $scope.CartList = response.data;
+                 });
+    };
+
+    $scope.deleteProductFromCart = function (id) {
+            $http.get(contextPath + '/cart/delete/' + id)
+                .then(function (response) {
+                $scope.fillCart();
+            });
+    };
+
+    $scope.addProductToCart = function (id) {
+        $http.get(contextPath + '/cart/add/' + id)
+            .then(function (response) {
+            $scope.fillCart();
+            });
+    };
+
 
     $scope.fillTable();
+    $scope.fillCart();
 });

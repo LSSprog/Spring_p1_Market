@@ -16,4 +16,10 @@ public class ProductDto {
         this.title = p.getTitle();
         this.price = p.getPrice();
     }
+
+    public ProductDto(Long id, String title, int price) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+    }
 }
