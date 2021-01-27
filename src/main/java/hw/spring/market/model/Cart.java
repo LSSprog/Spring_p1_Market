@@ -22,7 +22,6 @@ public class Cart {
     @PostConstruct
     public void init(){
         listProduct = new ArrayList<ProductDto>();
-        listProduct.add(new ProductDto(50L, "QQQ", 999));
     }
 
     public List<ProductDto> addProductToCart (ProductDto productDto) { /// или здесь void лучше сделать?
@@ -32,6 +31,11 @@ public class Cart {
     }
     public List<ProductDto> deleteProductFromCart (Long id) { /// или здесь void лучше сделать?
         //listProduct.remove(productService.findProductById(id).get());
+        for (ProductDto p: listProduct) {
+            if (p.getId() == id) {
+                listProduct.remove(p);
+            }
+                    }
         return listProduct;
     }
 
