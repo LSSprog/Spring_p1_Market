@@ -1,9 +1,10 @@
 angular.module('app', []).controller('indexController', function ($scope, $http) {
-    const contextPath = 'http://localhost:8189/market/api/v1';
+    const contextPath = 'http://localhost:8189/market';
+    $scope.authorized = false;
 
     $scope.fillTable = function (pageInd = 1) {
         $http({
-            url: contextPath + '/products',
+            url: contextPath + '/api/v1/products',
             method: 'GET',
             params: {
                 title: $scope.filter ? $scope.filter.title: null,
@@ -29,7 +30,7 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
 
 
      $scope.deleteProductById = function (id) {
-        $http.delete(contextPath + '/products/' + id)
+        $http.delete(contextPath + '/api/v1/products/' + id)
             .then(function (response) { //:Т сам дописал, не было его у меня и зачем он не понял
             $scope.fillTable();
         });
@@ -37,7 +38,7 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
 
 
     $scope.submitCreateNewProduct = function () {
-        $http.post(contextPath + '/products', $scope.newProduct)
+        $http.post(contextPath + '/api/v1/products', $scope.newProduct)
             .then(function (response) {
                 $scope.newProduct = null;
                 $scope.fillTable();
@@ -53,24 +54,39 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     };
 
     $scope.fillCart = function () {
-        $http.get(contextPath + '/cart')
+        $http.get(contextPath + '/api/v1/cart')
                  .then(function (response) {
                      $scope.CartList = response.data;
                  });
     };
 
     $scope.deleteProductFromCart = function (id) {
-            $http.get(contextPath + '/cart/delete/' + id)
+            $http.get(contextPath + '/api/v1/cart/delete/' + id)
                 .then(function (response) {
                 $scope.fillCart();
             });
     };
 
     $scope.addProductToCart = function (id) {
-        $http.get(contextPath + '/cart/add/' + id)
+        $http.get(contextPath + '/api/v1/cart/add/' + id)
             .then(function (response) {
             $scope.fillCart();
             });
+    };
+
+    $scope.tryToAuth = function () {
+        $http.post(contextPath + "/auth", $scope.user)
+        .then(function successCallback(response) {
+            if (response.data.token) {
+                $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
+                $scope.user.username = null;
+                $scope.user.password = null;
+                $scope.authorized = true;
+                $scope.fillTable();
+                }
+            }, function errorCallback(response) {
+                window.alert("Error");
+                });
     };
 
 

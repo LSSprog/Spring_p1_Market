@@ -1,7 +1,7 @@
 package hw.spring.market.controller;
 
 import hw.spring.market.dto.ProductDto;
-import hw.spring.market.model.Cart;
+import hw.spring.market.beans.Cart;
 import hw.spring.market.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/cart")
+@RequestMapping("/api/v1/cart")
 
 public class CartController {
     private final Cart cart;
