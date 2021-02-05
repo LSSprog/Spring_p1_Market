@@ -19,7 +19,7 @@
 
         <div class="mb-3 text-center" ng-show="!authorized">
             <form class="form-signin" ng-submit="tryToAuth()" style="max-width: 350px; padding: 15px; margin: 0 auto;">
-                <h1 class="h3 mb-3 font-weight-normal">Зарегистрируйтесь</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Авторизуйтесь</h1>
                 <label for="inputUsername" class="sr-only">Логин</label>
                 <input type="text" ng-model="user.username" id="inputUsername" class="form-control"
                        placeholder="Имя пользователя" style="margin-bottom: 10px;" required="">
@@ -31,7 +31,11 @@
             </form>
         </div>
 
-        <h3>Фильтр</h3>
+        <div ng-show="authorized">
+
+            <h3>Вы авторизованы как {{nameauth}}</h3>
+
+            <h3>Фильтр</h3>
         <form novalidate ng-submit="fillTable()">
             <div class="form-group row">
                 <div class="form-group col-md-3">
@@ -111,6 +115,7 @@
             </tr>
             </tbody>
         </table>
+        </div>
 
         <!--<table class="table table-hover" cellpadding="0" cellspacing="0">
             <thead>

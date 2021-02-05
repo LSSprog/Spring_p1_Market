@@ -27,7 +27,7 @@ VALUES
 
 INSERT INTO users_tbl (username_fld, password_fld, email_fld)
 VALUES
-('usre01', '$2y$12$j642UVCOijNFYX7FiKw1yuMBFcrybKrDvitngkK/7Uo1ayKpzQ/TK', 'user01@mail.com'),
+('user01', '$2y$12$j642UVCOijNFYX7FiKw1yuMBFcrybKrDvitngkK/7Uo1ayKpzQ/TK', 'user01@mail.com'),
 ('user02', '$2y$12$v97HVmcQeomvHP37l7A2AeYe0oRivmuWdMRsL87xzuDs4w0ioqaJ6', 'user02@mail.com');
 
 INSERT INTO users_roles_tbl (user_id, role_id)

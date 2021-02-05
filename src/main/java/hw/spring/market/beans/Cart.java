@@ -5,7 +5,10 @@ import hw.spring.market.service.ProductService;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -14,6 +17,7 @@ import java.util.List;
 @Component
 @Data
 @NoArgsConstructor
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 //@RequiredArgsConstructor
 public class Cart {
     private List<ProductDto> listProduct;
@@ -46,4 +50,5 @@ public class Cart {
         }
         return totalCost; // TODO посчитать сумму по всему листу в позиции price
     }
+
 }

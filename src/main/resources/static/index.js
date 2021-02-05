@@ -1,6 +1,7 @@
 angular.module('app', []).controller('indexController', function ($scope, $http) {
     const contextPath = 'http://localhost:8189/market';
     $scope.authorized = false;
+    $scope.nameauth = null;
 
     $scope.fillTable = function (pageInd = 1) {
         $http({
@@ -79,6 +80,7 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
         .then(function successCallback(response) {
             if (response.data.token) {
                 $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
+                $scope.nameauth = $scope.user.username;
                 $scope.user.username = null;
                 $scope.user.password = null;
                 $scope.authorized = true;
@@ -90,8 +92,9 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     };
 
 
-    $scope.fillTable();
-    $scope.fillCart(); // надо ли здесь эту функцию?
+//    $scope.fillTable();
+//    $scope.fillCart(); // надо ли здесь эту функцию?
+
     //    $scope.fillTable = function () {
     //        $http({
     //            url: contextPath + '/products',
