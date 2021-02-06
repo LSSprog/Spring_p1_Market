@@ -76,7 +76,7 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     };
 
     $scope.tryToAuth = function () {
-        $http.post(contextPath + "/auth", $scope.user)
+        $http.post(contextPath + '/auth', $scope.user)
         .then(function successCallback(response) {
             if (response.data.token) {
                 $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
@@ -90,6 +90,21 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
                 window.alert("Error");
                 });
     };
+
+    $scope.clearCart = function () {
+            $http.get(contextPath + '/api/v1/cart/clear')
+                .then(function (response) {
+                    $scope.fillCart();
+                });
+        };
+
+    $scope.incQuantity = function(id) {
+        $http.get(contextPath + '/api/v1/cart/inc/' + id)
+        .then(function (response) {
+            $scope.fillCart();
+        });
+    };
+
 
 
 //    $scope.fillTable();

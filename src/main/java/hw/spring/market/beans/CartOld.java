@@ -19,9 +19,9 @@ import java.util.List;
 @NoArgsConstructor
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 //@RequiredArgsConstructor
-public class Cart {
+public class CartOld {
     private List<ProductDto> listProduct;
-    //private ProductService productService; // почему здесь не сработал final - ругается
+    private ProductService productService; // почему здесь не сработал final - ругается
 
     @PostConstruct
     public void init(){

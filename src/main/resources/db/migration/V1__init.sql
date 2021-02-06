@@ -56,3 +56,11 @@ VALUES
 ('StW1', 3500),
 ('StW2', 6500),
 ('LaM', 3500);
+
+CREATE TABLE order_items_tbl (
+    order_item_id   bigserial PRIMARY KEY,
+    title_fld       VARCHAR(255),
+    quantity_fld    INT,
+    price_fld       INT,
+    cost_fld        INT
+);

@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class ProductService {
     private final ProductRepository productRepository;
 
-    public Optional<ProductDto> findProductById(Long id) {
+    public Optional<ProductDto> findProductDtoById(Long id) {
         return productRepository.findById(id).map(ProductDto::new);
 //        Product product = productRepository.findById(id).get();
 //        ProductDto productDto = new ProductDto(product);
@@ -29,9 +29,10 @@ public class ProductService {
     public Page<ProductDto> findAll(Specification<Product> spec, Integer page, int sizeOfPage) {
         return productRepository.findAll(spec, PageRequest.of(page - 1, sizeOfPage)).map(ProductDto::new);
     }
-//    public Optional<Product> findProductById(Long id) {
-//        return productRepository.findById(id);
-//    }
+
+    public Optional<Product> findProductById(Long id) {
+        return productRepository.findById(id);
+    }
 
 
 //    public List<ProductDto> findAllProducts() {

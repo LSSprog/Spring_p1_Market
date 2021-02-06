@@ -100,21 +100,38 @@
             <thead>
             <tr>
                 <td>Наименование</td>
+                <td>Кол-во</td>
+                <td></td>
                 <td>Цена</td>
+                <td>Стоимость</td>
                 <td></td>
             </tr>
             </thead>
 
             <tbody>
-            <tr ng-repeat="pr in CartList">
+            <tr ng-repeat="pr in CartList.listItem">
                 <td>{{pr.title}}</td>
-                <td>{{pr.price}}</td>
+                <td>{{pr.quantity}}</td>
                 <td>
-                    <button class="btn btn-danger" ng-click="deleteProductFromCart(pr.id)">Удалить из корзины</button>
+                    <button class="btn btn-success" ng-click="incQuantity(pr.product_id)">+</button>
+                </td>
+                <td>{{pr.price}}</td>
+                <td>{{pr.cost}}</td>
+                <td>
+                    <button class="btn btn-danger" ng-click="deleteProductFromCart(pr.product_id)">Удалить из корзины</button>
                 </td>
             </tr>
+            <tr>
+                <td>Итого</td>
+                <td>{{CartList.totalQuantity}}</td>
+                <td></td>
+                <td></td>
+                <td>{{CartList.totalCost}}</td>
+            </tr>
+
             </tbody>
         </table>
+            <button class="btn btn-danger" ng-click="clearCart()">Очистить корзину</button>
         </div>
 
         <!--<table class="table table-hover" cellpadding="0" cellspacing="0">

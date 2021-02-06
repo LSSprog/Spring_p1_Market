@@ -41,7 +41,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ProductDto findProductBuId(@PathVariable Long id) {
-        return productService.findProductById(id).orElseThrow(() ->
+        return productService.findProductDtoById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Product with ID:" + id + " does not exist"));
     }
 //    public Product findProductById(@PathVariable Long id) {
