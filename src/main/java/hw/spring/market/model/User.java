@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
@@ -41,4 +42,7 @@ public class User {
     @JoinTable (name = "users_roles_tbl", joinColumns = @JoinColumn (name = "user_id"),
                 inverseJoinColumns = @JoinColumn (name = "role_id"))
     private Collection<Role> roles;
+
+    @OneToMany(mappedBy = "user") // ?? на лекции вот эту обратнцю привязку по OneToMany не делали - но надо же её сделать?
+    private List<Order> orders;
 }

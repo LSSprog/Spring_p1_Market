@@ -33,7 +33,7 @@ public class ProductController {
         if (page < 1) {
             page = 1;
         }
-        return productService.findAll(ProductSpecs.build(params), page, 2);
+        return productService.findAll(ProductSpecs.build(params), page, 3);
         //return productService.findAllProducts();
         //return productService.findAllByPrice(min_price, max_price);
         //return productService.findAllByPages(page); //.getContent(); //getContent - выдёргиваем из Page в List

@@ -38,13 +38,13 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
      };
 
 
-    $scope.submitCreateNewProduct = function () {
-        $http.post(contextPath + '/api/v1/products', $scope.newProduct)
-            .then(function (response) {
-                $scope.newProduct = null;
-                $scope.fillTable();
-            });
-    };
+//    $scope.submitCreateNewProduct = function () {
+//        $http.post(contextPath + '/api/v1/products', $scope.newProduct)
+//            .then(function (response) {
+//                $scope.newProduct = null;
+//                $scope.fillTable();
+//            });
+//    };
 
     $scope.generatePagesInd = function(fistPage, lastPage) {
         let arr = [];
@@ -85,6 +85,8 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
                 $scope.user.password = null;
                 $scope.authorized = true;
                 $scope.fillTable();
+                $scope.fillCart();
+                $scope.fillOrders();
                 }
             }, function errorCallback(response) {
                 window.alert("Error");
@@ -101,6 +103,22 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     $scope.incQuantity = function(id) {
         $http.get(contextPath + '/api/v1/cart/inc/' + id)
         .then(function (response) {
+            $scope.fillCart();
+        });
+    };
+
+    $scope.fillOrders = function () {
+        $http.get(contextPath + '/api/v1/orders')
+        .then(function (response) {
+            $scope.OrderList = response.data;
+        });
+    };
+
+
+    $scope.createOrder = function() {
+        $http.get(contextPath + '/api/v1/orders/create')
+        .then(function (response) {
+            $scope.fillOrders();
             $scope.fillCart();
         });
     };
