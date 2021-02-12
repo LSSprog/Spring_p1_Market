@@ -51,7 +51,7 @@
                     <input class="form-control" type="number" ng-model="filter.max_price" id="filterMaxPrice">
                 </div>
             <div>
-                <button class="btn btn-success" type="submit">Применить</button>
+                <button class="btn btn-primary" type="submit">Применить</button>
             </div>
             </div>
         </form>
@@ -70,10 +70,10 @@
                 <td>{{p.title}}</td>
                 <td>{{p.price}}</td>
                 <td>
-                      <button class="btn btn-danger" ng-click="deleteProductById(p.id)">Удалить товар</button>
+                    <button class="btn btn-success" ng-click="addProductToCart(p.id)">В Корзину</button>
                 </td>
                 <td>
-                    <button class="btn btn-danger" ng-click="addProductToCart(p.id)">В Корзину</button>
+                      <button class="btn btn-danger" ng-click="deleteProductById(p.id)">Удалить товар</button>
                 </td>
 
             </tr>
