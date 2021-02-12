@@ -57,10 +57,24 @@ VALUES
 ('StW2', 6500),
 ('LaM', 3500);
 
+CREATE TABLE orders_tbl (
+    order_id         bigserial PRIMARY KEY,
+    user_id          bigint REFERENCES users_tbl (user_id),
+    total_quan_fld   INT,
+    total_cost_fld   INT,
+    created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE order_items_tbl (
     order_item_id   bigserial PRIMARY KEY,
+    order_id        bigint REFERENCES orders_tbl (order_id),
+    product_id      bigint REFERENCES products_tbl (product_id),
     title_fld       VARCHAR(255),
     quantity_fld    INT,
     price_fld       INT,
-    cost_fld        INT
+    cost_fld        INT,
+    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
