@@ -15,8 +15,8 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final Cart_v2 cart;
 
-    public Order createOrderFromCart(User user) {
-        Order newOrder = new Order(cart, user);
+    public Order createOrderFromCart(User user, String address) {
+        Order newOrder = new Order(cart, user, address);
         newOrder = orderRepository.save(newOrder); // очень странная запись - не понял её... в пред строке создали order, а теперь ещё раз "order ="
         cart.clear();
         return newOrder;

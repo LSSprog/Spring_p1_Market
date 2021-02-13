@@ -9,6 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
     <script src="index.js"></script>
 </head>
 
@@ -31,9 +32,16 @@
             </form>
         </div>
 
+<!--        <div class="mb-3 text-center" ng-show="authorized">-->
+<!--            <button class="btn btn-danger" ng-click="logout()">Выйти</button>-->
+<!--        </div>-->
+
+
         <div ng-show="authorized">
 
             <h3>Вы авторизованы как {{nameauth}}</h3>
+            <button class="btn btn-danger" ng-click="logout()">Выйти</button>
+
 
             <h3>Фильтр</h3>
         <form novalidate ng-submit="fillTable()">
@@ -131,7 +139,10 @@
 
             </tbody>
         </table>
-            <button class="btn btn-primary" ng-click="createOrder()">Оформить заказ</button>
+            <label for="inputAddress">Введите адрес доставки</label>
+            <input type="text" ng-model="order.address" id="inputAddress" class="form-control" placeholder="Адрес">
+
+            <button class="btn btn-primary" ng-click="createOrderWithAddress(order.address)">Оформить заказ</button>
             <button class="btn btn-danger" ng-click="clearCart()">Очистить корзину</button>
 
             <h3>Мои заказы</h3>

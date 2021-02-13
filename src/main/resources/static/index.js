@@ -1,4 +1,4 @@
-angular.module('app', []).controller('indexController', function ($scope, $http) {
+angular.module('app', ['ngStorage']).controller('indexController', function ($scope, $http, $localStorage) {
     const contextPath = 'http://localhost:8189/market';
     $scope.authorized = false;
     $scope.nameauth = null;
@@ -81,11 +81,15 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
             if (response.data.token) {
                 $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
                 $scope.nameauth = $scope.user.username;
+                                       // $localStorage.marketUsername = $scope.user.username;
+                                       // $localStorage.marketTokenWithBearerPrefix = 'Bearer ' + response.data.token;
                 $scope.user.username = null;
                 $scope.user.password = null;
                 $scope.authorized = true;
                 $scope.fillTable();
+                $scope.CartList = null;
                 $scope.fillCart();
+                $scope.OrderList = null;
                 $scope.fillOrders();
                 }
             }, function errorCallback(response) {
@@ -107,7 +111,7 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
         });
     };
 
-    $scope.fillOrders = function () {
+    $scope.fillOrders = function() {
         $http.get(contextPath + '/api/v1/orders')
         .then(function (response) {
             $scope.OrderList = response.data;
@@ -115,13 +119,44 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     };
 
 
-    $scope.createOrder = function() {
+    $scope.createOrder = function(address) {
         $http.get(contextPath + '/api/v1/orders/create')
         .then(function (response) {
             $scope.fillOrders();
             $scope.fillCart();
         });
     };
+
+    $scope.createOrderWithAddress = function(address) { //переделать потом на Post запрос
+         $http.get(contextPath + '/api/v1/orders/create/' + address)
+         .then(function (response) {
+             $scope.order.address = null;
+             $scope.fillOrders();
+             $scope.fillCart();
+         });
+
+    };
+
+// скопировал это просто, чтобы было, как образец
+            // if ($localStorage.marketUsername) {
+            //     $http.defaults.headers.common.Authorization = $localStorage.marketTokenWithBearerPrefix;
+            //     $scope.fillTable();
+            //     $scope.fillOrders();
+            //     $scope.fillCart();
+            //     $scope.authorized = true;
+            // }
+
+
+// для кнопки выход
+        // $scope.logout = function () {
+        //     $http.defaults.headers.common.Authorization = null;
+        //     delete $localStorage.marketUsername;
+        //     delete $localStorage.marketTokenWithBearerPrefix;
+        //     $scope.authorized = false;
+        // }
+
+
+
 
 
 

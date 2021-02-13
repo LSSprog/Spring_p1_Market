@@ -7,9 +7,7 @@ import hw.spring.market.service.OrderService;
 import hw.spring.market.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -27,11 +25,22 @@ public class OrderController {
     public void createNewOrderFromCart(Principal principal) {
         User user = userService.findByUsername(principal.getName())
                 .orElseThrow(() -> new ResourceNotFoundException("User for order not found"));
-        orderService.createOrderFromCart(user);
+        orderService.createOrderFromCart(user, "без адреса");
     }
 
     @GetMapping
     public List<OrderDto> getUsersOrders(Principal principal) {
         return orderService.findAllOrdersByUsername(principal.getName()).stream().map(OrderDto::new).collect(Collectors.toList());
     }
+
+    @GetMapping("/create/{address}")
+    public void createNewOrderFromCartWithAddress(@PathVariable String address, Principal principal) {
+        User user = userService.findByUsername(principal.getName())
+                .orElseThrow(() -> new ResourceNotFoundException("User for order not found"));
+        orderService.createOrderFromCart(user, address);
+    }
+
+
+
+//    @PostMapping("/create")
 }

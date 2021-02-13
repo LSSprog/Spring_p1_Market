@@ -37,6 +37,9 @@ public class Order {
     @Column(name = "total_cost_fld")
     private int cost;
 
+    @Column(name = "address_fld")
+    private String address;
+
     @Column(name = "created_at")
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -45,11 +48,12 @@ public class Order {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public Order(Cart_v2 cart, User user) {
+    public Order(Cart_v2 cart, User user, String address) {
         this.items = new ArrayList<>();
         this.user = user;
         this.cost = cart.getTotalCost();
         this.totalQuantity = cart.getTotalQuantity();
+        this.address = address;
         //this.items = cart.getListItems(); //ПОЧЕМУ так нельзя?
         cart.getListItems().stream().forEach((orderItem) -> {
             orderItem.setOrder(this);

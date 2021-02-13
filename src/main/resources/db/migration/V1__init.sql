@@ -62,6 +62,7 @@ CREATE TABLE orders_tbl (
     user_id          bigint REFERENCES users_tbl (user_id),
     total_quan_fld   INT,
     total_cost_fld   INT,
+    address_fld      VARCHAR(255),
     created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
