@@ -1,7 +1,13 @@
 package hw.spring.market;
 
+import hw.spring.market.configs.AppConfig;
+import hw.spring.market.dto.ProductDto;
+import hw.spring.market.model.User;
+import hw.spring.market.service.ProductService;
+import hw.spring.market.service.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
@@ -15,6 +21,13 @@ public class MarketSsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MarketSsApplication.class, args);
+//		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+//		ProductService productService = context.getBean("productService", ProductService.class);
+//		ProductDto productDto = productService.findProductDtoById(1L).get();
+//		System.out.println(productDto.getTitle());
+//
+//		context.close();
+
 	}
 
 }
