@@ -7,5 +7,5 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @Configuration
 @EnableAspectJAutoProxy
 @ComponentScan("hw.spring.market")
-public class AppConfig {
+public class AppConfig { //это для AOP было
 }

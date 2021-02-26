@@ -43,6 +43,6 @@ public class User {
                 inverseJoinColumns = @JoinColumn (name = "role_id"))
     private Collection<Role> roles;
 
-    @OneToMany(mappedBy = "user") // ?? на лекции вот эту обратнцю привязку по OneToMany не делали - но надо же её сделать?
+    @OneToMany(mappedBy = "user") // обратку связь можно делать, но не обязательно. только если часто надо пользоваться
     private List<Order> orders;
 }

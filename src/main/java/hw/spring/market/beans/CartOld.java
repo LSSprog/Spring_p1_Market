@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 //@RequiredArgsConstructor
-public class CartOld {
+public class CartOld { /* СТАРАЯ КОРЗИНА
     private List<ProductDto> listProduct;
     private ProductService productService; // почему здесь не сработал final - ругается
 
@@ -50,5 +50,5 @@ public class CartOld {
         }
         return totalCost; // TODO посчитать сумму по всему листу в позиции price
     }
-
+*/
 }

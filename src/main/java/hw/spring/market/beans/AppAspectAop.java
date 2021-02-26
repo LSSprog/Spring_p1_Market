@@ -13,8 +13,8 @@ import java.util.HashMap;
 
 @Aspect
 @Component
-public class AppAspectAop {
-    public HashMap<String, Integer> count;
+public class AppAspectAop { // это для AOP
+    /*public HashMap<String, Integer> count;
     public HashMap<String, Long> time;
 
     @PostConstruct
@@ -60,5 +60,5 @@ public class AppAspectAop {
         return out;
     }
 
-
+*/
 }

@@ -44,15 +44,6 @@ public class ProductController {
         return productService.findProductDtoById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Product with ID:" + id + " does not exist"));
     }
-//    public Product findProductById(@PathVariable Long id) {
-//        return productService.findProductById(id).get();
-//    }
-
-//    @GetMapping("/delete/{id}")
-//    public void deleteProductById(@PathVariable Long id){
-//        productService.deleteProductById(id);
-//    }
-
     @DeleteMapping("/{id}")
     public void deleteProductBuId(@PathVariable Long id) {
         productService.deleteProductById(id);
@@ -64,10 +55,6 @@ public class ProductController {
         productDto.setId(null);
         return productService.saveNewProduct(productDto);
     }
-//    public Product saveNewProduct(@RequestBody Product product) {
-//        product.setId(null);
-//        return productService.saveOrUpdate(product);
-//    }
 
     @PutMapping
     public ProductDto updateProduct(@RequestBody ProductDto productDto) {
@@ -76,5 +63,14 @@ public class ProductController {
 //    public Product updateProduct(@RequestBody Product product) {
 //        return productService.saveOrUpdate(product);
 //    }
+    //    public Product saveNewProduct(@RequestBody Product product) {
+//        product.setId(null);
+//        return productService.saveOrUpdate(product);
+//    }
+//    @GetMapping("/delete/{id}")
+//    public void deleteProductById(@PathVariable Long id){
+//        productService.deleteProductById(id);
+//    }
+
 
 }

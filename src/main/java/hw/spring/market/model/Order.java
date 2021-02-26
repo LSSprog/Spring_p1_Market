@@ -54,7 +54,6 @@ public class Order {
         this.cost = cart.getTotalCost();
         this.totalQuantity = cart.getTotalQuantity();
         this.address = address;
-        //this.items = cart.getListItems(); //ПОЧЕМУ так нельзя?
         cart.getListItems().stream().forEach((orderItem) -> {
             orderItem.setOrder(this);
             items.add(orderItem);

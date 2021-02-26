@@ -42,5 +42,10 @@ public class OrderController {
 
 
 
-//    @PostMapping("/create")
+    @PostMapping("/create")
+    public void createNewOrderFromCartWithAddressPost(@RequestBody String address, Principal principal) {
+        User user = userService.findByUsername(principal.getName())
+                .orElseThrow(() -> new ResourceNotFoundException("User for order not found"));
+        orderService.createOrderFromCart(user, address);
+    }
 }

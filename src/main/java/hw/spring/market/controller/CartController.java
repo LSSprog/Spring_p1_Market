@@ -15,7 +15,6 @@ import java.util.List;
 @RequestMapping("/api/v1/cart")
 
 public class CartController {
-    //private final CartOld cart;
     private final Cart_v2 cart;
     private final ProductService productService;
 
