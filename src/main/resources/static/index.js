@@ -128,7 +128,8 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
     };
 
     $scope.createOrderWithAddress = function(address) { //переделать потом на Post запрос
-         $http.get(contextPath + '/api/v1/orders/create/' + address)
+//         $http.get(contextPath + '/api/v1/orders/create/' + address)
+         $http.post(contextPath + '/api/v1/orders/create/', address)
          .then(function (response) {
              $scope.order.address = null;
              $scope.fillOrders();

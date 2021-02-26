@@ -12,6 +12,7 @@ public class OrderDto {
     private int totalCost;
     private int totalQuantity;
     private String createdDateTime;
+    private String address;
 
     public OrderDto(Order order) {
         this.id = order.getId();
@@ -19,5 +20,6 @@ public class OrderDto {
         this.totalCost = order.getCost();
         this.totalQuantity = order.getTotalQuantity();
         this.createdDateTime = order.getCreatedAt().toString();
+        this.address = order.getAddress();
     }
 }

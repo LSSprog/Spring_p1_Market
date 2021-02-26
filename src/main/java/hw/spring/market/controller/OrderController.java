@@ -33,12 +33,12 @@ public class OrderController {
         return orderService.findAllOrdersByUsername(principal.getName()).stream().map(OrderDto::new).collect(Collectors.toList());
     }
 
-    @GetMapping("/create/{address}")
-    public void createNewOrderFromCartWithAddress(@PathVariable String address, Principal principal) {
-        User user = userService.findByUsername(principal.getName())
-                .orElseThrow(() -> new ResourceNotFoundException("User for order not found"));
-        orderService.createOrderFromCart(user, address);
-    }
+//    @GetMapping("/create/{address}")
+//    public void createNewOrderFromCartWithAddress(@PathVariable String address, Principal principal) {
+//        User user = userService.findByUsername(principal.getName())
+//                .orElseThrow(() -> new ResourceNotFoundException("User for order not found"));
+//        orderService.createOrderFromCart(user, address);
+//    }
 
 
 
