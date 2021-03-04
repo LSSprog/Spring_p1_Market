@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,5 +25,9 @@ public class OrderService {
 
     public List<Order> findAllOrdersByUsername(String username) {
         return orderRepository.findAllByUserUsername(username);
+    }
+
+    public Optional<Order> findOrderById(Long id) {
+        return orderRepository.findById(id);
     }
 }
