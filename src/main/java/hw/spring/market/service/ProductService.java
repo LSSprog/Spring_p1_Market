@@ -3,6 +3,7 @@ package hw.spring.market.service;
 import hw.spring.market.dto.ProductDto;
 import hw.spring.market.model.Product;
 import hw.spring.market.repository.ProductRepository;
+import hw.spring.market.ws.products.ProductWS;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,6 +57,18 @@ public class ProductService {
         product.setPrice(productDto.getPrice());
         productRepository.save(product); //здесь метод save обновит же имеющийся по ID, а не создаст новый - ДА
         return productDto;
+    }
+
+    private static final Function<Product, ProductWS> functionProductToSoap = pr -> {
+        ProductWS pws = new ProductWS();
+        pws.setId(pr.getId());
+        pws.setTitle(pr.getTitle());
+        pws.setPrice(pr.getPrice());
+        return pws;
+    };
+
+    public List<ProductWS> getAllProductsWs() {
+        return productRepository.findAll().stream().map(functionProductToSoap).collect(Collectors.toList());
     }
 
     //    public List<Product> findAllByPrice(Integer min, Integer max) {
