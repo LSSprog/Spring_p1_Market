@@ -23,7 +23,7 @@ public class ProductsEndpoint {
         return response;
     }
         /*
-        Пример запроса: POST http://localhost:8080/ws
+        Пример запроса: POST http://localhost:8080/market/ws
 
         <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:f="http://www.market_ss.com/spring/ws/products">
             <soapenv:Header/>
