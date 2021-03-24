@@ -79,3 +79,21 @@ CREATE TABLE order_items_tbl (
     updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE carts_tbl (
+    cart_id         UUID PRIMARY KEY,
+    cost_fld        INT,
+    quantity_fld    INT
+);
+
+CREATE TABLE cart_items_tbl (
+    cart_items_id   bigserial PRIMARY KEY,
+    cart_id         UUID REFERENCES carts_tbl (cart_id),
+    product_id      bigint REFERENCES products_tbl (product_id),
+    title_fld       VARCHAR(255),
+    quantity_fld    INT,
+    price_fld       INT,
+    cost_fld        INT,
+    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+);

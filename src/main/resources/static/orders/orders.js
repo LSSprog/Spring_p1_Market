@@ -8,8 +8,18 @@ angular.module('app').controller('ordersController', function ($scope, $http) {
         });
     };
 
+    $scope.createOrderWithAddress = function(address) {
+         $http.post(contextPath + '/api/v1/orders/create/', address)
+         .then(function (response) {
+             $scope.order.address = null;
+             $scope.fillOrders();
+             //$scope.fillCart();
+         });
+    };
+
     $scope.fillOrders();
 
+    // другой вариант get запроса (синтаксис)
     /*$scope.showMyOrders = function () {
         $http({
             url: contextPath + '/api/v1/orders',

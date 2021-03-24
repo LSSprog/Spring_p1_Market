@@ -1,4 +1,4 @@
-angular.module('app').controller('productsController', function ($scope, $http) {
+angular.module('app').controller('productsController', function ($scope, $http, $localStorage) {
     const contextPath = 'http://localhost:8189/market';
 
     $scope.fillTable = function (pageInd = 1) {
@@ -35,11 +35,24 @@ angular.module('app').controller('productsController', function ($scope, $http) 
         return arr;
     };
 
-    $scope.addProductToCart = function (id) {
-        $http.get(contextPath + '/api/v1/cart/add/' + id)
+// Это когда была корзина на бэке
+//    $scope.addProductToCart = function (id) {
+//        $http.get(contextPath + '/api/v1/cart/add/' + id)
+//            .then(function (response) {
+//            });
+//    };
+
+// теперь корзина на фронте
+    $scope.addToCartJS = function (productId) {
+        $http.get(contextPath + '/api/v1/products/' + productId)
             .then(function (response) {
+                $localStorage.marketCart.add(response.data);
+                console.log($localStorage.marketCart);
             });
-    };
+    }
+
+
+    $scope.fillTable();
 
 // Это получаетяс не нужно
 //    $scope.createOrderWithAddress = function(address) {
@@ -49,9 +62,6 @@ angular.module('app').controller('productsController', function ($scope, $http) 
 //         });
 //
 //    };
-
-    $scope.fillTable();
-
 
     /*$scope.showProductsPage = function (pageIndex = 1) {
         $http({

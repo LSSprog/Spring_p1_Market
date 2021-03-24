@@ -1,49 +1,38 @@
 package hw.spring.market.controller;
 
-import hw.spring.market.beans.Cart_v2;
+import hw.spring.market.beans.Cart_v3;
 import hw.spring.market.dto.CartDto;
-import hw.spring.market.dto.ProductDto;
-import hw.spring.market.beans.CartOld;
+import hw.spring.market.exeptionsHandling.ResourceNotFoundException;
+import hw.spring.market.service.CartService;
 import hw.spring.market.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/cart")
-
 public class CartController {
-    private final Cart_v2 cart;
-    private final ProductService productService;
+    private final CartService cartService;
 
-    @GetMapping
-    public CartDto showCart() {
+    @PostMapping
+    public UUID createNewCart() {
+        Cart_v3 cart = cartService.save(new Cart_v3());
+        return cart.getId();
+    }
+
+    @GetMapping("/{id}") // проверить работает ли так или {uuid} обязательно
+    public CartDto getCurrentCart(@PathVariable UUID id) {
+        Cart_v3 cart = cartService.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Не найдена корзина с ID " + id));
         return new CartDto(cart);
     }
 
-    @GetMapping("/add/{id}")
-    public void addProductToCart(@PathVariable Long id){
-        cart.addProductToCart(id);
-        //return new CartDto(cart);
-        //ProductDto productDto = productService.findProductById(id).get();
-        //return cart.addProductToCart(productService.findProductById(id).get());
+    @GetMapping("{uuid}/add/{product_id}")
+    public void addProductToCart(@PathVariable UUID uuid, @PathVariable(name = "product_id") Long productID) {
+        cartService.addToCart(uuid, productID);
     }
 
-    @GetMapping("/delete/{id}")
-    public void deleteProductFromCart(@PathVariable Long id) {
-        cart.deleteProductFromCart(id);
-    }
 
-    @GetMapping("/clear")
-    public CartDto clearCart() {
-        cart.clear();
-        return new CartDto(cart);
-    }
-
-    @GetMapping("/inc/{id}")
-    public void incQuantity(@PathVariable Long id) {
-        cart.addProductToCart(id);
-    }
 }

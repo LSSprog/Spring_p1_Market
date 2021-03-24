@@ -8,8 +8,8 @@ angular.module('app').controller('cartController', function ($scope, $http, $loc
                  });
     };
 
-    $scope.addProductToCart = function (id) {
-        $http.get(contextPath + '/api/v1/cart/add/' + id)
+    $scope.addProductToCart = function (product_id) {
+        $http.get(contextPath + '/api/v1/cart/add/' + product_id)
             .then(function (response) {
             $scope.fillCart();
             });
