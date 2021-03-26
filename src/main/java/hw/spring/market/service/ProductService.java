@@ -56,7 +56,8 @@ public class ProductService {
         product.setTitle(productDto.getTitle());
         product.setPrice(productDto.getPrice());
         productRepository.save(product); //здесь метод save обновит же имеющийся по ID, а не создаст новый - ДА
-        return productDto;
+        ProductDto pdto2 = new ProductDto(product);
+        return pdto2; //productDto;
     }
 
     private static final Function<Product, ProductWS> functionProductToSoap = pr -> {
