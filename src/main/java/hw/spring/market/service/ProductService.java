@@ -72,6 +72,10 @@ public class ProductService {
         return productRepository.findAll().stream().map(functionProductToSoap).collect(Collectors.toList());
     }
 
+    public List<ProductDto> getAllProductsForTest() {
+        return productRepository.findAll().stream().map(ProductDto::new).collect(Collectors.toList());
+    }
+
     //    public List<Product> findAllByPrice(Integer min, Integer max) {
 //        return productRepository.findAllByPriceBetween(min, max);
 //    }
