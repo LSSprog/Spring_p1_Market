@@ -27,13 +27,15 @@ public class SpyTest {
 //    private ProductRepository productRepoMock;
 
     @Test
-    public void spyTest() {
+    public void spyTest() {  // ???Так и не получилось подменить size на 100 ((((
 
-        // ???Так и не получилось подменить size на 100 ((((
+        dtoList = productService.getAllProductsForTest();
 
-        //dtoList = productService.getAllProductsForTest();
+//        assertEquals(12, dtoList.size());
 
-        //assertEquals(12, dtoList.size());
+        Mockito.doReturn(100).when(dtoList).size();
+
+        assertEquals(100, dtoList.size());
 
 //        ProductDto testProDto = new ProductDto();
 //        testProDto.setId(1L);
@@ -49,9 +51,6 @@ public class SpyTest {
 
 //        Mockito.verify(dtoList).add(testProDto);
 
-        Mockito.doReturn(100).when(dtoList.size());
-
-        assertEquals(100, dtoList.size());
 
     }
 }

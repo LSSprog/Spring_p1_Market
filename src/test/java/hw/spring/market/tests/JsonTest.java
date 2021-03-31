@@ -5,6 +5,7 @@ import hw.spring.market.model.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.json.JacksonTester;
+import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.IOException;
 
@@ -26,8 +27,8 @@ public class JsonTest {
 
         assertThat(jacksonTester.write(pDto))
                 .hasJsonPathStringValue("$.title")
-                // ? как написать проверку, что $.price > 3000 ?
-                //.extractingJsonPathNumberValue("$.price").;//("$.price[?(@.price>1000)]");
+                // Отвечали на лекции - Не выходит здесь так, нет метода greaterThen ? как написать проверку, что $.price > 3000 ?
                 .extractingJsonPathNumberValue("$.id").isEqualTo(5); // здесь получается надо писать не 5L, а 5, в json всё числа просто
+
     }
 }
