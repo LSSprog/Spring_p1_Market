@@ -60,6 +60,12 @@ public class ProductService {
         return pdto2; //productDto;
     }
 
+    // Для тестов писал метод
+//    public List<ProductDto> getAllProductsForTest() {
+//        return productRepository.findAll().stream().map(ProductDto::new).collect(Collectors.toList());
+//    }
+
+    // Для WS
     private static final Function<Product, ProductWS> functionProductToSoap = pr -> {
         ProductWS pws = new ProductWS();
         pws.setId(pr.getId());
@@ -72,9 +78,6 @@ public class ProductService {
         return productRepository.findAll().stream().map(functionProductToSoap).collect(Collectors.toList());
     }
 
-    public List<ProductDto> getAllProductsForTest() {
-        return productRepository.findAll().stream().map(ProductDto::new).collect(Collectors.toList());
-    }
 
     //    public List<Product> findAllByPrice(Integer min, Integer max) {
 //        return productRepository.findAllByPriceBetween(min, max);

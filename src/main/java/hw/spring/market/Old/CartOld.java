@@ -1,4 +1,4 @@
-package hw.spring.market.beans;
+package hw.spring.market.Old;
 
 import hw.spring.market.dto.ProductDto;
 import hw.spring.market.service.ProductService;

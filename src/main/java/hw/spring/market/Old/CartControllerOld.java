@@ -1,14 +1,4 @@
-package hw.spring.market.controller;
-
-import hw.spring.market.beans.Cart_v2;
-import hw.spring.market.dto.CartDto;
-import hw.spring.market.dto.ProductDto;
-import hw.spring.market.beans.CartOld;
-import hw.spring.market.service.ProductService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+package hw.spring.market.Old;
 
 //@RestController
 //@RequiredArgsConstructor

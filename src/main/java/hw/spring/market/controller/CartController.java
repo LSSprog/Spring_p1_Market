@@ -1,13 +1,13 @@
 package hw.spring.market.controller;
 
-import hw.spring.market.beans.Cart_v3;
+import hw.spring.market.model.Cart_v3;
 import hw.spring.market.dto.CartDto;
 import hw.spring.market.exeptionsHandling.ResourceNotFoundException;
 import hw.spring.market.service.CartService;
-import hw.spring.market.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.UUID;
 
 @RestController
@@ -17,9 +17,11 @@ public class CartController {
     private final CartService cartService;
 
     @PostMapping
-    public UUID createNewCart() {
-        Cart_v3 cart = cartService.save(new Cart_v3());
-        return cart.getId();
+    public UUID createNewCart(Principal principal) {
+        if (principal == null) {
+            return cartService.getCartForUser(null, null);
+        }
+        return cartService.getCartForUser(principal.getName(), null);
     }
 
     @GetMapping("/{id}") // проверить работает ли так или {uuid} обязательно
@@ -29,9 +31,14 @@ public class CartController {
         return new CartDto(cart);
     }
 
-    @GetMapping("{uuid}/add/{product_id}")
+    @PostMapping("/add")
     public void addProductToCart(@PathVariable UUID uuid, @PathVariable(name = "product_id") Long productID) {
         cartService.addToCart(uuid, productID);
+    }
+
+    @PostMapping("/clear")
+    public void clearCart(@RequestParam UUID cartId) {
+        cartService.clearCart(cartId);
     }
 
 

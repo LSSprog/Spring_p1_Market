@@ -1,6 +1,5 @@
 package hw.spring.market.model;
 
-import hw.spring.market.beans.Cart_v3;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -55,15 +54,28 @@ public class CartItem {
         this.cost = this.price;
     }
 
+    // посмотреть может этот метод уже и не нужен, если есть с кол-вом
     public void incQuantity() {
         this.quantity++;
         this.cost = this.quantity * this.price;
     }
 
+    public void incQuantity(int num) {
+        this.quantity += num;
+        recalculateCartItemCost();
+    }
+
     public void decQuantity() {
-        this.quantity--;
+        if (quantity > 0) {
+            this.quantity--;
+            recalculateCartItemCost();
+        }
+    }
+
+    private void recalculateCartItemCost() {
         this.cost = this.quantity * this.price;
     }
+
 
 
 }

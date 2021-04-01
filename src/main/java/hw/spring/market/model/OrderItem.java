@@ -45,22 +45,11 @@ public class OrderItem {
     private LocalDateTime updatedAt;
 
 
-    public OrderItem(Product product) {
-        this.product = product;
-        this.quantity = 1;
-        this.price = product.getPrice();
-        this.cost = price;
+    public OrderItem(CartItem cartItem) {
+        this.product = cartItem.getProduct();
+        this.quantity = cartItem.getQuantity();
+        this.price = cartItem.getPrice();
+        this.cost = cartItem.getCost();
     }
 
-    public void incQuantity() {
-        quantity++;
-        cost = quantity * price;
-    }
-
-    public void decQuantity() {
-        if (quantity > 0) {
-            quantity--;
-            cost = quantity * price;
-        }
-    }
 }

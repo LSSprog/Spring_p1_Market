@@ -4,6 +4,7 @@ import hw.spring.market.beans.JwtTokenUtil;
 import hw.spring.market.dto.JwtRequest;
 import hw.spring.market.dto.JwtResponse;
 import hw.spring.market.exeptionsHandling.MarketError;
+import hw.spring.market.service.CartService;
 import hw.spring.market.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ public class AuthController {
     private final UserService userService;
     private final JwtTokenUtil jwtTokenUtil;
     private final AuthenticationManager authenticationManager;
+    private CartService cartService;
 
     @PostMapping ("/auth")
     public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest jwtRequest) {
@@ -34,6 +36,9 @@ public class AuthController {
         }
         UserDetails userDetails = userService.loadUserByUsername(jwtRequest.getUsername());
         String token = jwtTokenUtil.doToken(userDetails);
+
+        cartService.getCartForUser(jwtRequest.getUsername(), jwtRequest.getCartId());
+
         return ResponseEntity.ok(new JwtResponse(token));
     }
 }

@@ -81,6 +81,7 @@ CREATE TABLE order_items_tbl (
 
 CREATE TABLE carts_tbl (
     cart_id         UUID PRIMARY KEY,
+    user_id         bigserial REFERENCES users_tbl (user_id),
     cost_fld        INT,
     quantity_fld    INT
 );

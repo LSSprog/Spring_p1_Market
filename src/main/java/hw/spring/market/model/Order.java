@@ -1,6 +1,6 @@
 package hw.spring.market.model;
 
-import hw.spring.market.beans.Cart_v2;
+import hw.spring.market.Old.Cart_v2;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
@@ -48,16 +48,23 @@ public class Order {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public Order(Cart_v2 cart, User user, String address) {
+    public Order(Cart_v3 cart, User user, String address) {
         this.items = new ArrayList<>();
         this.user = user;
         this.cost = cart.getTotalCost();
         this.totalQuantity = cart.getTotalQuantity();
         this.address = address;
-        cart.getListItems().stream().forEach((orderItem) -> {
-            orderItem.setOrder(this);
-            items.add(orderItem);
-        });
+
+        for (CartItem ci : cart.getListItems()) {
+            OrderItem oi = new OrderItem(ci);
+            oi.setOrder(this);
+            this.items.add(oi);
+        }
+
+//        cart.getListItems().stream().forEach((orderItem) -> {
+//            orderItem.setOrder(this);
+//            items.add(orderItem);
+//        });
     }
 
 }

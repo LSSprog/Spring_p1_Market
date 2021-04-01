@@ -1,7 +1,6 @@
 package hw.spring.market.dto;
 
-import hw.spring.market.beans.Cart_v2;
-import hw.spring.market.beans.Cart_v3;
+import hw.spring.market.model.Cart_v3;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,8 +15,8 @@ public class CartDto {
     private int totalQuantity;
 
     public CartDto(Cart_v3 cart) {
-        this.listItem = cart.getItems().stream().map(CartItemDto::new).collect(Collectors.toList());
-        this.totalCost = cart.getCost();
-        this.totalQuantity = cart.getQuantity();
+        this.listItem = cart.getListItems().stream().map(CartItemDto::new).collect(Collectors.toList());
+        this.totalCost = cart.getTotalCost();
+        this.totalQuantity = cart.getTotalCost();
     }
 }
