@@ -42,15 +42,24 @@ angular.module('app').controller('productsController', function ($scope, $http, 
 //            });
 //    };
 
-// теперь корзина на фронте
-    $scope.addToCartJS = function (productId) {
-        $http.get(contextPath + '/api/v1/products/' + productId)
-            .then(function (response) {
-                $localStorage.marketCart.add(response.data);
-                console.log($localStorage.marketCart);
-            });
+    $scope.addProductToCart = function (productId) {
+        $http({
+            url: contextPath + '/api/v1/cart/add',
+            method: 'POST',
+            params: {
+                product_id: productId,
+                uuid: $localStorage.marketCartUuid
+            }
+        }).then(function (response) {
+            console.log("OK");
+        });
     }
 
+    $scope.createOrder = function () {
+        $http.get(contextPath + '/api/v1/orders/create')
+            .then(function (response) {
+            });
+    }
 
     $scope.fillTable();
 
@@ -109,5 +118,13 @@ angular.module('app').controller('productsController', function ($scope, $http, 
             .then(function (response) {
             });
     }*/
+    // теперь корзина на фронте
+    //    $scope.addToCartJS = function (productId) {
+    //        $http.get(contextPath + '/api/v1/products/' + productId)
+    //            .then(function (response) {
+    //                $localStorage.marketCart.add(response.data);
+    //                console.log($localStorage.marketCart);
+    //            });
+    //    }
 
 });

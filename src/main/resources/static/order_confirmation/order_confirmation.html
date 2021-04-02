@@ -1,6 +1,6 @@
 <div>
     <h3>Ваш заказ</h3>
-    <table ng-show="CartList.listItem.length > 0" class="table table-hover" cellpadding="0" cellspacing="0">
+    <table ng-show="marketUserCart.listItems.length > 0" class="table table-hover" cellpadding="0" cellspacing="0">
         <thead>
         <tr>
             <td>Наименование</td>
@@ -10,7 +10,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="pr in CartList.listItem">
+        <tr ng-repeat="pr in marketUserCart.listItems">
             <td>{{pr.title}}</td>
             <td>{{pr.quantity}}</td>
             <td>{{pr.price}}</td>
@@ -18,9 +18,9 @@
         </tr>
         <tr>
             <td>Итого</td>
-            <td>{{CartList.totalQuantity}}</td>
+            <td>{{marketUserCart.totalQuantity}}</td>
             <td></td>
-            <td>{{CartList.totalCost}}</td>
+            <td>{{marketUserCart.totalCost}}</td>
         </tr>
         </tbody>
     </table>

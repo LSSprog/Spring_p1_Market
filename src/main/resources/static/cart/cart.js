@@ -1,27 +1,33 @@
-angular.module('app').controller('cartController', function ($scope, $http, $location) {
+angular.module('app').controller('cartController', function ($scope, $http, $location, $localStorage) {
     const contextPath = 'http://localhost:8189/market';
 
     $scope.fillCart = function () {
-        $http.get(contextPath + '/api/v1/cart')
+        $http.get(contextPath + '/api/v1/cart' + $localStorage.marketCartUuid)
                  .then(function (response) {
-                     $scope.CartList = response.data;
+                     $scope.marketUserCart = response.data;
                  });
     };
 
-    $scope.addProductToCart = function (product_id) {
-        $http.get(contextPath + '/api/v1/cart/add/' + product_id)
-            .then(function (response) {
-            $scope.fillCart();
-            });
-    };
-
     $scope.clearCart = function () {
-            $http.get(contextPath + '/api/v1/cart/clear')
+        $http({
+            url: contextPath + '/api/v1/cart/clear',
+            method: 'POST',
+            params: {
+                uuid: $localStorage.marketCartUuid
+                }
+            })
                 .then(function (response) {
                     $scope.fillCart();
                 });
     };
 
+    $scope.goToOrderSubmit = function () {
+        $location.path('/order_confirmation');
+    }
+
+    $scope.fillCart();
+
+    //получается этот метод не нужен
     $scope.createOrderWithAddress = function(address) {
          $http.post(contextPath + '/api/v1/orders/create/', address)
          .then(function (response) {
@@ -31,25 +37,27 @@ angular.module('app').controller('cartController', function ($scope, $http, $loc
          });
     };
 
-    $scope.incQuantity = function(id) {
+    $scope.incQuantity = function(id) { //надо переделать
         $http.get(contextPath + '/api/v1/cart/inc/' + id)
         .then(function (response) {
             $scope.fillCart();
         });
     };
 
-    $scope.deleteProductFromCart = function (id) {
+    $scope.deleteProductFromCart = function (id) { //надо переделать
             $http.get(contextPath + '/api/v1/cart/delete/' + id)
                 .then(function (response) {
                 $scope.fillCart();
             });
     };
 
-    $scope.goToOrderSubmit = function () {
-        $location.path('/order_confirmation');
-    }
 
-    $scope.fillCart();
+//    $scope.addProductToCart = function (product_id) {
+//        $http.get(contextPath + '/api/v1/cart/add/' + product_id)
+//            .then(function (response) {
+//            $scope.fillCart();
+//            });
+//    };
 
     /*$scope.showCart = function () {
         $http({
@@ -82,9 +90,4 @@ angular.module('app').controller('cartController', function ($scope, $http, $loc
             });
     }*/
 
-    $scope.goToOrderSubmit = function () {
-        $location.path('/order_confirmation');
-    }
-
-    $scope.fillCart();
 });

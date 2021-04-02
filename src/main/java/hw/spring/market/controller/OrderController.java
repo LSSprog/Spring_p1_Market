@@ -30,7 +30,7 @@ public class OrderController {
         return orderService.findAllOrdersByUsername(principal.getName()).stream().map(OrderDto::new).collect(Collectors.toList());
     }
 
-    @PostMapping("/create")
+    @PostMapping//("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public OrderDto createNewOrderFromCartWithAddress(Principal principal, @RequestParam UUID cartId, @RequestParam String address) {
 //        User user = userService.findByUsername(principal.getName())

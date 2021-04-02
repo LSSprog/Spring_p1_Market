@@ -29,7 +29,7 @@ public class SpyTest {
     @Test
     public void spyTest() {  // ???Так и не получилось подменить size на 100 ((((
 
-        dtoList = productService.getAllProductsForTest();
+        //dtoList = productService.getAllProductsForTest();
 
 //        assertEquals(12, dtoList.size());
 
