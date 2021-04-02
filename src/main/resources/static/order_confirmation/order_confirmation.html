@@ -1,0 +1,37 @@
+<div>
+    <h3>Ваш заказ</h3>
+    <table ng-show="marketUserCart.listItems.length > 0" class="table table-hover" cellpadding="0" cellspacing="0">
+        <thead>
+        <tr>
+            <td>Наименование</td>
+            <td>Кол-во</td>
+            <td>Цена</td>
+            <td>Стоимость</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="pr in marketUserCart.listItems">
+            <td>{{pr.title}}</td>
+            <td>{{pr.quantity}}</td>
+            <td>{{pr.price}}</td>
+            <td>{{pr.cost}}</td>
+        </tr>
+        <tr>
+            <td>Итого</td>
+            <td>{{marketUserCart.totalQuantity}}</td>
+            <td></td>
+            <td>{{marketUserCart.totalCost}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form novalidate ng-submit="submitOrder()">
+        <div class="form-group col-md-6">
+            <label for="inputAddress">Введите адрес доставки</label>
+            <input class="form-control" type="text" ng-model="orderInfo.address" id="inputAddress" placeholder="Адрес">
+        </div>
+        <div>
+            <button class="btn btn-success" type="submit">Оформить заказ</button>
+        </div>
+    </form>
+</div>

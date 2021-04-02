@@ -46,16 +46,7 @@ INSERT INTO products_tbl (title_fld, price_fld)
 VALUES
 ('Re', 2900),
 ('StM', 3200),
-('LaW1', 3500),
-('LaW2', 3700),
-('LaM1', 6500),
-('Re2', 4600),
-('StW3', 5900),
-('StM2', 6000),
-('LaW', 6200),
-('StW1', 3500),
-('StW2', 6500),
-('LaM', 3500);
+('LaW1', 4500);
 
 CREATE TABLE orders_tbl (
     order_id         bigserial PRIMARY KEY,
@@ -81,7 +72,6 @@ CREATE TABLE order_items_tbl (
 
 CREATE TABLE carts_tbl (
     cart_id         UUID PRIMARY KEY,
-    user_id         bigserial REFERENCES users_tbl (user_id),
     cost_fld        INT,
     quantity_fld    INT
 );
