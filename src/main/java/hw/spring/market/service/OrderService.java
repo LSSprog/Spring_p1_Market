@@ -19,7 +19,7 @@ import java.util.UUID;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final CartService cartService;
-    private UserService userService;
+    private final UserService userService;
 
     @Transactional
     public Order createOrderFromUserCart(String username, UUID cartId, String address) {

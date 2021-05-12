@@ -2,7 +2,7 @@ angular.module('app').controller('cartController', function ($scope, $http, $loc
     const contextPath = 'http://localhost:8189/market';
 
     $scope.fillCart = function () {
-        $http.get(contextPath + '/api/v1/cart' + $localStorage.marketCartUuid)
+        $http.get(contextPath + '/api/v1/cart/' + $localStorage.marketCartUuid)
                  .then(function (response) {
                      $scope.marketUserCart = response.data;
                  });
@@ -10,10 +10,10 @@ angular.module('app').controller('cartController', function ($scope, $http, $loc
 
     $scope.clearCart = function () {
         $http({
-            url: contextPath + '/api/v1/cart/clear',
+            url: contextPath + '/api/v1/cart/clear/',
             method: 'POST',
             params: {
-                uuid: $localStorage.marketCartUuid
+                cartUuid: $localStorage.marketCartUuid
                 }
             })
                 .then(function (response) {
@@ -24,8 +24,6 @@ angular.module('app').controller('cartController', function ($scope, $http, $loc
     $scope.goToOrderSubmit = function () {
         $location.path('/order_confirmation');
     }
-
-    $scope.fillCart();
 
     //получается этот метод не нужен
     $scope.createOrderWithAddress = function(address) {
@@ -44,12 +42,28 @@ angular.module('app').controller('cartController', function ($scope, $http, $loc
         });
     };
 
-    $scope.deleteProductFromCart = function (id) { //надо переделать
+    /*$scope.deleteProductFromCart = function (id) { //надо переделать
             $http.get(contextPath + '/api/v1/cart/delete/' + id)
                 .then(function (response) {
                 $scope.fillCart();
             });
+    };*/
+
+    $scope.deleteProductFromCart = function (productId) {
+        $http({
+            url: contextPath + '/api/v1/cart/delete',
+            method: 'POST',
+            params: {
+                product_id: productId,
+                cartUuid: $localStorage.marketCartUuid
+                }
+            }).then(function (response) {
+                    $scope.fillCart();
+                });
     };
+
+
+    $scope.fillCart();
 
 
 //    $scope.addProductToCart = function (product_id) {

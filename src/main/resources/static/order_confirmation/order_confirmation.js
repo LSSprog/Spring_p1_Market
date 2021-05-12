@@ -3,7 +3,7 @@ angular.module('app').controller('orderConfirmationController', function ($scope
 
     $scope.cartContentRequest = function () {
         $http({
-            url: contextPath + '/api/v1/cart' + $localStorage.happyCartUuid), //а здесь не будет видно uuid?
+            url: contextPath + '/api/v1/cart/' + $localStorage.marketCartUuid, //а здесь не будет видно uuid?
             method: 'GET'
         }).then(function (response) {
             $scope.marketUserCart = response.data;

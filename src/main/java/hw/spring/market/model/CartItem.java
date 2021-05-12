@@ -50,6 +50,7 @@ public class CartItem {
     public CartItem(Product product) {
         this.product = product;
         this.quantity = 1;
+        this.title = product.getTitle();
         this.price = product.getPrice();
         this.cost = this.price;
     }

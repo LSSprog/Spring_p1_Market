@@ -1,5 +1,5 @@
 <h3>Корзина</h3>
-<table ng-show="marketUserCart.listItems.length > 0" class="table table-hover" cellpadding="0" cellspacing="0">
+<table ng-show="marketUserCart.listItem.length > 0" class="table table-hover" cellpadding="0" cellspacing="0"> <!---->
     <thead>
     <tr>
         <td>Наименование</td>
@@ -11,16 +11,16 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="pr in marketUserCart.listItems">
+    <tr ng-repeat="pr in marketUserCart.listItem">
         <td>{{pr.title}}</td>
         <td>{{pr.quantity}}</td>
         <td> <!--доделать разобраться-->
-            <button class="btn btn-success" ng-click="incQuantity(pr.product_id)">+</button>
+            <button class="btn btn-success" ng-click="incQuantity(pr.productId)">+</button>
         </td>
         <td>{{pr.price}}</td>
         <td>{{pr.cost}}</td>
         <td> <!--доделать разобраться-->
-            <button class="btn btn-danger" ng-click="deleteProductFromCart(pr.product_id)">Удалить из корзины</button>
+            <button class="btn btn-danger" ng-click="deleteProductFromCart(pr.productId)">Удалить из корзины</button>
         </td>
     </tr>
     <tr>
@@ -32,6 +32,6 @@
     </tr>
     </tbody>
 </table>
-<span ng-show="marketUserCart.listItems.length == 0">Ваша корзина пуста</span>
-<button ng-show="marketUserCart.listItems.length > 0" class="btn btn-primary" ng-click="goToOrderSubmit()">Перейти к оформлению заказа</button>
-<button ng-show="marketUserCart.listItems.length > 0"  class="btn btn-danger" ng-click="clearCart()">Очистить корзину</button>
+<span ng-show="marketUserCart.listItem.length == 0">Ваша корзина пуста</span>
+<button ng-show="marketUserCart.listItem.length > 0" class="btn btn-primary" ng-click="goToOrderSubmit()">Перейти к оформлению заказа</button>
+<button ng-show="marketUserCart.listItem.length > 0"  class="btn btn-danger" ng-click="clearCart()">Очистить корзину</button>

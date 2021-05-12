@@ -17,6 +17,6 @@ public class CartDto {
     public CartDto(Cart_v3 cart) {
         this.listItem = cart.getListItems().stream().map(CartItemDto::new).collect(Collectors.toList());
         this.totalCost = cart.getTotalCost();
-        this.totalQuantity = cart.getTotalCost();
+        this.totalQuantity = cart.getTotalQuantity();
     }
 }

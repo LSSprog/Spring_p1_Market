@@ -32,11 +32,11 @@ public class OrderController {
 
     @PostMapping//("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public OrderDto createNewOrderFromCartWithAddress(Principal principal, @RequestParam UUID cartId, @RequestParam String address) {
+    public OrderDto createNewOrderFromCartWithAddress(Principal principal, @RequestParam UUID cartUuid, @RequestParam String address) {
 //        User user = userService.findByUsername(principal.getName())
 //                .orElseThrow(() -> new ResourceNotFoundException("User for order not found"));
-        Order order = orderService.createOrderFromUserCart(principal.getName(), cartId, address);
-        cartService.clearCart(cartId);
+        Order order = orderService.createOrderFromUserCart(principal.getName(), cartUuid, address);
+        cartService.clearCart(cartUuid);
         return new OrderDto(order);
     }
 

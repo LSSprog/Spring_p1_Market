@@ -80,6 +80,11 @@ public class CartService {
         return newCart.getId();
     }
 
+    public void deleteProductFromCart(UUID cartId, Long productId) {
+        Cart_v3 cart = findById(cartId).orElseThrow(() -> new ResourceNotFoundException("Не найдена корзина с ID " + cartId));
+        cart.deleteItemByProductId(productId);
+    }
+
     // Посмотреть как оптимизировать этот код на втором варианте
 //    public UUID getCartFoUser_v2 (String username, UUID cartId) {
 //        if (username == null) {

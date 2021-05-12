@@ -75,7 +75,7 @@ angular.module('app').controller('indexController', function ($scope, $http, $lo
     $scope.tryToLogout = function () {
         $scope.clearUser();
 
-        $http.post(contextPath + '/api/v1/card')
+        $http.post(contextPath + '/api/v1/cart')
             .then(function successCallback(response) {
             $localStorage.marketCartUuid = response.data;
             });

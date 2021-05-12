@@ -23,7 +23,7 @@ public class AuthController {
     private final UserService userService;
     private final JwtTokenUtil jwtTokenUtil;
     private final AuthenticationManager authenticationManager;
-    private CartService cartService;
+    private final CartService cartService;
 
     @PostMapping ("/auth")
     public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest jwtRequest) {

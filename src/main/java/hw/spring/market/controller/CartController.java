@@ -24,22 +24,39 @@ public class CartController {
         return cartService.getCartForUser(principal.getName(), null);
     }
 
-    @GetMapping("/{id}") // проверить работает ли так или {uuid} обязательно
-    public CartDto getCurrentCart(@PathVariable UUID id) {
-        Cart_v3 cart = cartService.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Не найдена корзина с ID " + id));
+    @GetMapping("/{uuid}") // проверить работает ли {id} так, или {uuid} обязательно
+    public CartDto getCurrentCart(@PathVariable UUID uuid) {
+        Cart_v3 cart = cartService.findById(uuid)
+                .orElseThrow(() -> new ResourceNotFoundException("Не найдена корзина с ID " + uuid));
         return new CartDto(cart);
     }
 
     @PostMapping("/add")
-    public void addProductToCart(@PathVariable UUID uuid, @PathVariable(name = "product_id") Long productID) {
+    public void addProductToCart(@RequestParam(name = "product_id") Long productID, @RequestParam UUID uuid) {
         cartService.addToCart(uuid, productID);
     }
 
     @PostMapping("/clear")
-    public void clearCart(@RequestParam UUID cartId) {
-        cartService.clearCart(cartId);
+    public void clearCart(@RequestParam UUID cartUuid) {
+        cartService.clearCart(cartUuid);
+        //пытаюсь найти почему корзина не чиститься
+        System.out.println("Корзина очищена:" + cartUuid);
+        Cart_v3 cart = cartService.findById(cartUuid)
+                .orElseThrow(() -> new ResourceNotFoundException("Не найдена корзина с ID " + cartUuid));
+        int P = cart.getTotalCost();
+        System.out.println(P);
     }
+
+// Была первая версия удаления продукта из корзины, пишет не существует параметр productId
+    @PostMapping("/delete")
+    public void deleteProductFromCart(@RequestParam (name = "product_id") Long productId, @RequestParam UUID cartUuid) {
+        cartService.deleteProductFromCart(cartUuid, productId);
+    }
+
+//    @DeleteMapping()
+//    public void deleteProductFromCart(@RequestParam (name = "product_id") Long productId, @RequestParam UUID cartUuid) {
+//        cartService.deleteProductFromCart(cartUuid, productId);
+//    }
 
 
 }

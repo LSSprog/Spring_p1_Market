@@ -49,8 +49,10 @@ public class Cart_v3 {
 
     public void recalculate() {
         totalCost = 0;
+        totalQuantity = 0;
         for (CartItem ci: this.listItems) {
             totalCost += ci.getCost();
+            totalQuantity += ci.getQuantity();
         }
     }
 
@@ -60,6 +62,8 @@ public class Cart_v3 {
         }
         this.listItems.clear();
         recalculate();
+        // удалить эту строку
+        System.out.println("чисто в корзине" + this.id + " стоимость " + this.totalCost);
     }
 
     public void mergeCarts(Cart_v3 anotherCart) {
@@ -78,5 +82,10 @@ public class Cart_v3 {
     }
 
     //по хорошему надо вернуть удаление товара из корзины целиком
+    public void deleteItemByProductId (Long productId) {
+        this.listItems.removeIf(p -> p.getProduct().getId().equals(productId));
+        recalculate();
+    }
+
 
 }
