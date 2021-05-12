@@ -83,6 +83,11 @@ public class Cart_v3 {
 
     //по хорошему надо вернуть удаление товара из корзины целиком
     public void deleteItemByProductId (Long productId) {
+        for (CartItem ci: this.listItems) {
+            if (ci.getProduct().getId().equals(productId)) {
+                ci.setCart(null);
+            }
+        }
         this.listItems.removeIf(p -> p.getProduct().getId().equals(productId));
         recalculate();
     }

@@ -42,6 +42,7 @@ public class CartService {
         }
     }
 
+    @Transactional
     public void clearCart(UUID cartId) {
         Cart_v3 cart = findById(cartId).orElseThrow(() -> new ResourceNotFoundException("Не найдена корзина с ID " + cartId));
         cart.clear();
@@ -80,6 +81,7 @@ public class CartService {
         return newCart.getId();
     }
 
+    @Transactional
     public void deleteProductFromCart(UUID cartId, Long productId) {
         Cart_v3 cart = findById(cartId).orElseThrow(() -> new ResourceNotFoundException("Не найдена корзина с ID " + cartId));
         cart.deleteItemByProductId(productId);
